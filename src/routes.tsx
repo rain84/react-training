@@ -1,13 +1,13 @@
-import type { RouteObject } from 'react-router-dom'
-import { Home, ParentChildRerender } from 'pages'
+import { Route } from 'react-router-dom'
+import { Home, ParentChildRerender, Error404 } from 'pages'
 
-export const routes: RouteObject[] = [
-  {
-    path: '/',
-    element: <Home />,
-  },
-  {
-    path: '/parent-child-rerender',
-    element: <ParentChildRerender />,
-  },
-]
+export const routes = (
+  <>
+    <Route path="/" element={<Home />} errorElement={<Error404 />}></Route>
+    <Route
+      path="/parent-child-rerender"
+      element={<ParentChildRerender />}
+    ></Route>
+    <Route path="*" element={<Error404 />} errorElement={<Error404 />}></Route>
+  </>
+)
