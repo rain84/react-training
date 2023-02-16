@@ -1,7 +1,6 @@
 import { memo } from 'react'
-
-import { Subchildren } from '.'
 import { getData } from 'utils'
+import { Subchildren } from '.'
 
 const data = getData()
 
