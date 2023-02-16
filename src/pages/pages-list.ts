@@ -1,9 +1,9 @@
-export type TItem = {
+export type Page = {
   name: string
-  to: string
+  href: string
 }
 
-export const PagesList: TItem[] = [
-  { name: 'Parent-Child rerender', to: 'parent-child-rerender' },
-  { name: 'GSAP', to: 'gsap' },
+export const PagesList: Page[] = [
+  { name: 'Parent-Child rerender', href: 'parent-child-rerender' },
+  { name: 'GSAP', href: 'gsap' },
 ]
