@@ -5,11 +5,8 @@ import { AppLayout } from 'layouts'
 export const routes = (
   <Route path="/" element={<AppLayout />}>
     <Route index element={<Home />} />
-    <Route
-      path="/parent-child-rerender"
-      element={<ParentChildRerender />}
-    ></Route>
-    <Route path="/gsap" element={<Gsap />}></Route>
-    <Route path="*" element={<Error404 />} errorElement={<Error404 />}></Route>
+    <Route path="/parent-child-rerender" element={<ParentChildRerender />} />
+    <Route path="/gsap" element={<Gsap />} />
+    <Route path="*" element={<Error404 />} />
   </Route>
 )
