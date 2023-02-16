@@ -1,11 +1,11 @@
 import { Item } from './item.shell'
-import type { TItem } from 'pages'
+import type { Page } from 'pages'
 
 type Props = {
   items: ({
     count?: number
     isActive?: boolean
-  } & TItem)[]
+  } & Page)[]
 }
 
 export const Sidebar = ({ items }: Props) => {
@@ -25,7 +25,7 @@ export const Sidebar = ({ items }: Props) => {
           </div>
 
           <ul className="mt-12">
-            {items?.map(({ name, count, to, isActive }) => (
+            {items?.map(({ name, count, href: to, isActive }) => (
               <li
                 key={name}
                 className="flex w-full justify-between text-gray-400 hover:text-gray-300 cursor-pointer items-center mb-6"
