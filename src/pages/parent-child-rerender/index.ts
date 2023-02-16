@@ -1,1 +1,1 @@
-export * from './component'
+export * from './parent-child-rerender.component'
