@@ -1,7 +1,7 @@
 import { memo } from 'react'
 
 import { Children, Subchildren, List } from '.'
-import { getData } from '../utils'
+import { getData } from 'utils'
 
 type Props = {
   prop?: number

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { Parent1, Parent2, List, Subchildren } from './components'
+import { Parent1, Parent2, List, Subchildren } from 'components'
 import './App.css'
 
 function App() {

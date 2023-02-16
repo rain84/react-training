@@ -1,5 +1,3 @@
-import { memo } from 'react'
-
 type Props = {
   prop?: number
   name: string
