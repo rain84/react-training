@@ -1,1 +1,1 @@
-export * from './gsap.component'
+export * from './context'
