@@ -26,7 +26,7 @@ export const GsapContext = createContext<TContext>({
   gsap,
 })
 
-export const GsapProvider = ({ children }: IProps) => {
+export const Gsap = ({ children, className }: IProps) => {
   const root = useRef(null)
   const [callbacks, setCallbacks] = useState<Array<Register>>([])
   const revert = useRef<(() => void)[]>([])
@@ -66,7 +66,9 @@ export const GsapProvider = ({ children }: IProps) => {
 
   return (
     <GsapContext.Provider value={value}>
-      <div ref={root}>{children}</div>
+      <div ref={root} className={className}>
+        {children}
+      </div>
     </GsapContext.Provider>
   )
 }
