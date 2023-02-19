@@ -29,6 +29,7 @@ export const GsapContext = createContext<TContext>({
 export const GsapProvider = ({ children }: IProps) => {
   const root = useRef(null)
   const [callbacks, setCallbacks] = useState<Array<Register>>([])
+  const revert = useRef<(() => void)[]>([])
 
   register = useCallback((cb: Register) => {
     setCallbacks((prev) => [...prev, cb])
@@ -50,10 +51,17 @@ export const GsapProvider = ({ children }: IProps) => {
 
   useLayoutEffect(() => {
     let ctx = gsap.context(() => {
-      callbacks.forEach((cb) => cb(gsap))
+      callbacks.forEach((cb) => {
+        const cleanup = cb(gsap)
+        if (typeof cleanup === 'function') revert.current.push(cleanup)
+      })
     }, root)
 
-    return () => ctx.revert()
+    return () => {
+      revert.current.forEach((cleanup) => cleanup())
+      revert.current.length = 0
+      ctx.revert()
+    }
   }, [callbacks])
 
   return (
