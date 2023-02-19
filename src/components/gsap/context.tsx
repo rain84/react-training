@@ -13,6 +13,7 @@ type TGsap = typeof gsap
 type Register = (gsap: TGsap) => void
 export type TContext = {
   useGsap: (cb: Register) => void
+  gsap: TGsap
 }
 
 let register: (cb: Register) => () => void
@@ -22,9 +23,10 @@ const useGsap = (cb: Register) => {
 
 export const GsapContext = createContext<TContext>({
   useGsap: () => {},
+  gsap,
 })
 
-export const GsapProvider = ({ children, className }: IProps) => {
+export const GsapProvider = ({ children }: IProps) => {
   const root = useRef(null)
   const [callbacks, setCallbacks] = useState<Array<Register>>([])
 
@@ -41,6 +43,7 @@ export const GsapProvider = ({ children, className }: IProps) => {
   const value = useMemo<TContext>(
     () => ({
       useGsap,
+      gsap,
     }),
     []
   )
@@ -55,9 +58,7 @@ export const GsapProvider = ({ children, className }: IProps) => {
 
   return (
     <GsapContext.Provider value={value}>
-      <div ref={root} className={className}>
-        {children}
-      </div>
+      <div ref={root}>{children}</div>
     </GsapContext.Provider>
   )
 }
