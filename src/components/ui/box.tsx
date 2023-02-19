@@ -1,6 +1,6 @@
 import { HTMLAttributes, forwardRef } from 'react'
 
-export const Button = forwardRef<HTMLDivElement, HTMLAttributes<Element>>(
+export const Box = forwardRef<HTMLDivElement, HTMLAttributes<Element>>(
   ({ className, children, ...props }, ref) => (
     <div
       ref={ref}

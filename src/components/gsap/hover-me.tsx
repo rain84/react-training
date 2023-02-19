@@ -1,6 +1,6 @@
 import { useContext, useRef } from 'react'
 import { GsapContext } from './context'
-import { Button } from 'ui'
+import { Box } from 'ui'
 
 export const HoverMe = ({ className }: IProps) => {
   const { gsap } = useContext(GsapContext)
@@ -15,13 +15,13 @@ export const HoverMe = ({ className }: IProps) => {
   }
 
   return (
-    <Button
+    <Box
       ref={box}
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
       className={`bg-[#28a92b] ${className}`}
     >
       <span>Hover Me</span>
-    </Button>
+    </Box>
   )
 }
