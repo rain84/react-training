@@ -7,7 +7,7 @@ export const Box = forwardRef<HTMLDivElement, HTMLAttributes<Element>>(
       className={`rounded-md flex justify-center items-center h-12 w-12 p-2 ${className}`}
       {...props}
     >
-      <span>{children}</span>
+      {children}
     </div>
   )
 )
