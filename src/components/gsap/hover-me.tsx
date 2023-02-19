@@ -21,7 +21,7 @@ export const HoverMe = ({ className }: IProps) => {
       onMouseLeave={onLeave}
       className={`bg-[#28a92b] ${className}`}
     >
-      <span>Hover Me</span>
+      Hover Me
     </Box>
   )
 }

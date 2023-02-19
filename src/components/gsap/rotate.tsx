@@ -12,7 +12,7 @@ export const Rotate = ({ className }: IProps) => {
 
   return (
     <Box ref={box} className={`bg-orange-400 ${className}`}>
-      <span>Hello</span>
+      Hello
     </Box>
   )
 }

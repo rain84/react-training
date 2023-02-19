@@ -13,14 +13,14 @@ export const ReusableComponents = ({ className }: IProps) => {
   //  prettier-ignore
   useGsap((gsap) => {
     gsap.to(box[1].current, { rotation: 360, repeat: -1, repeatDelay: 1, yoyo: true })
-    gsap.to(box[3].current, { x: 100, repeat: -1, repeatDelay: 1, yoyo: true })
+    gsap.to(box[3].current, { x: -80, repeat: -1, repeatDelay: 1, yoyo: true })
     gsap.set(box[2].current, { backgroundColor: 'red' })
   })
 
   return (
     <div className="flex flex-col justify-between space-y-4">
       <Box ref={box[1]} className="bg-green-600">
-        <span>Box</span>
+        Box
       </Box>
       <Box ref={box[2]} className="bg-green-600">
         <span className="inline-block font-bold scale-50">
@@ -28,7 +28,7 @@ export const ReusableComponents = ({ className }: IProps) => {
         </span>
       </Box>
       <Box ref={box[3]} className="bg-green-600">
-        <span>Box</span>
+        Box
       </Box>
     </div>
   )
