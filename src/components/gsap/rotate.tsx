@@ -1,7 +1,8 @@
 import { useContext, useRef } from 'react'
 import { GsapContext } from './context'
+import { Button } from 'ui'
 
-export const Rotate = () => {
+export const Rotate = ({ className }: IProps) => {
   const { useGsap } = useContext(GsapContext)
   const box = useRef(null)
 
@@ -10,11 +11,8 @@ export const Rotate = () => {
   })
 
   return (
-    <div
-      ref={box}
-      className="box h-12 w-12 rounded-md bg-slate-400 flex justify-center items-center"
-    >
+    <Button ref={box} className={`bg-orange-400 ${className}`}>
       <span>Hello</span>
-    </div>
+    </Button>
   )
 }
