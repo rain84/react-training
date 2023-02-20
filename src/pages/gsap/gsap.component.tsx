@@ -1,4 +1,10 @@
-import { Gsap, Rotate, HoverMe, ReusableComponents } from 'components/gsap'
+import {
+  Gsap,
+  Rotate,
+  HoverMe,
+  ReusableComponents,
+  Timelines,
+} from 'components/gsap'
 
 export const GsapPage = () => (
   <section>
@@ -7,6 +13,7 @@ export const GsapPage = () => (
       <Rotate />
       <HoverMe />
       <ReusableComponents />
+      <Timelines />
     </Gsap>
   </section>
 )
