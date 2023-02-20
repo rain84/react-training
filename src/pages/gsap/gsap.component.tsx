@@ -1,19 +1,12 @@
-import {
-  GsapProvider,
-  Rotate,
-  HoverMe,
-  ReusableComponents,
-} from 'components/gsap'
+import { Gsap, Rotate, HoverMe, ReusableComponents } from 'components/gsap'
 
-export const Gsap = () => (
+export const GsapPage = () => (
   <section>
     <p className="text-center text-red-600 uppercase">gsap</p>
-    <GsapProvider>
-      <div className="flex flex-row justify-start">
-        <Rotate className="mr-4" />
-        <HoverMe className="mr-4" />
-        <ReusableComponents />
-      </div>
-    </GsapProvider>
+    <Gsap className="flex flex-row justify-start space-x-4">
+      <Rotate />
+      <HoverMe />
+      <ReusableComponents />
+    </Gsap>
   </section>
 )
