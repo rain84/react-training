@@ -12,7 +12,7 @@ import { gsap } from 'gsap'
 import { useArray } from 'hooks'
 
 type TGsap = typeof gsap
-type Register = (gsap: TGsap) => void
+type Register = (gsap: TGsap, context: gsap.Context) => void | (() => void)
 
 export type TContext = {
   useGsap: (cb: Register, deps?: unknown[]) => void
@@ -47,7 +47,7 @@ const GsapProvider = ({ children, className }: IProps) => {
         unregister()
         if (nextDeps) removeDeps(...nextDeps)
       }
-    }, [])
+    }, [nextDeps])
   }
 
   const value = useMemo<TContext>(
@@ -59,10 +59,11 @@ const GsapProvider = ({ children, className }: IProps) => {
   )
 
   useLayoutEffect(() => {
-    let ctx = gsap.context(() => {
+    let ctx: gsap.Context
+    ctx = gsap.context(() => {
       callbacks.forEach((cb) => {
-        const cleanup = cb(gsap)
-        if (typeof cleanup === 'function') revert.current.push(cleanup)
+        const cleanup = cb(gsap, ctx)
+        if (cleanup) revert.current.push(cleanup)
       })
     }, root)
 
