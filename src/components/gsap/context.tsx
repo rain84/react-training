@@ -1,3 +1,5 @@
+// TODO: add tests
+
 import {
   useLayoutEffect,
   useRef,
@@ -8,17 +10,14 @@ import {
   useEffect,
 } from 'react'
 import { gsap } from 'gsap'
+import { useArray } from 'hooks'
 
 type TGsap = typeof gsap
 type Register = (gsap: TGsap) => void
-export type TContext = {
-  useGsap: (cb: Register) => void
-  gsap: TGsap
-}
 
-let register: (cb: Register) => () => void
-const useGsap = (cb: Register) => {
-  useEffect(() => register(cb), [])
+export type TContext = {
+  useGsap: (cb: Register, deps?: unknown[]) => void
+  gsap: TGsap
 }
 
 export const GsapContext = createContext<TContext>({
@@ -26,20 +25,31 @@ export const GsapContext = createContext<TContext>({
   gsap,
 })
 
-export const Gsap = ({ children, className }: IProps) => {
+const GsapProvider = ({ children, className }: IProps) => {
   const root = useRef(null)
+  const [deps, { add: addDeps, remove: removeDeps }] = useArray<unknown>([])
   const [callbacks, setCallbacks] = useState<Array<Register>>([])
   const revert = useRef<(() => void)[]>([])
 
-  register = useCallback((cb: Register) => {
+  const register = useCallback((cb: Register) => {
     setCallbacks((prev) => [...prev, cb])
-
     const unregister = () => {
       setCallbacks((prev) => prev.filter((nextCb) => nextCb !== cb))
     }
-
     return unregister
   }, [])
+
+  const useGsap = (cb: Register, nextDeps?: unknown[]) => {
+    useEffect(() => {
+      const unregister = register(cb)
+      if (nextDeps) addDeps(...nextDeps)
+
+      return () => {
+        unregister()
+        if (nextDeps) removeDeps(...nextDeps)
+      }
+    }, [])
+  }
 
   const value = useMemo<TContext>(
     () => ({
@@ -62,7 +72,7 @@ export const Gsap = ({ children, className }: IProps) => {
       revert.current.length = 0
       ctx.revert()
     }
-  }, [callbacks])
+  }, [callbacks, deps])
 
   return (
     <GsapContext.Provider value={value}>
@@ -72,3 +82,5 @@ export const Gsap = ({ children, className }: IProps) => {
     </GsapContext.Provider>
   )
 }
+
+export const Gsap = GsapProvider
