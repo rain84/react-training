@@ -1,5 +1,4 @@
 // TODO: add tests
-
 import {
   useLayoutEffect,
   useRef,
