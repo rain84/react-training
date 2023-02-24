@@ -1,1 +1,1 @@
-export const Test = () => <section>Test</section>
+export const TestPage = () => <section>Test</section>
