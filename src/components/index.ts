@@ -1,2 +1,2 @@
-export * from './parent-child-rerender'
+export * from './rerendering'
 export * from './gsap'

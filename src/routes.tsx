@@ -1,7 +1,7 @@
 import { Route } from 'react-router-dom'
 import {
   HomePage,
-  ParentChildRerenderPage,
+  RerenderingPage,
   Error404Page,
   GsapPage,
   TestPage,
@@ -11,10 +11,7 @@ import { AppLayout } from 'layouts'
 export const routes = (
   <Route path="/" element={<AppLayout />}>
     <Route index element={<HomePage />} />
-    <Route
-      path="/parent-child-rerender"
-      element={<ParentChildRerenderPage />}
-    />
+    <Route path="/rerendering" element={<RerenderingPage />} />
     <Route path="/gsap" element={<GsapPage />} />
     <Route path="/test" element={<TestPage />} />
     <Route path="*" element={<Error404Page />} />

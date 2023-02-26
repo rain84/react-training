@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Parent1, Parent2, List, Subchildren } from 'components'
 
-export const ParentChildRerenderPage = () => {
+export const RerenderingPage = () => {
   const timer = 3000
   const [prop, setProp] = useState(0)
 

@@ -1,5 +1,5 @@
 export * from './home'
-export * from './parent-child-rerender'
+export * from './rerendering'
 export * from './error404'
 export * from './gsap'
 export * from './pages-list'
