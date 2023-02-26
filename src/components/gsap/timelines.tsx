@@ -1,6 +1,6 @@
-import { useContext, useEffect, useRef } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { GsapContext } from './context'
-import { Box, Circle } from 'ui'
+import { Box, Circle, ButtonPlay } from 'ui'
 import { useToggle } from 'hooks'
 
 export const Timelines = ({ className }: IProps) => {
@@ -11,31 +11,38 @@ export const Timelines = ({ className }: IProps) => {
     circle: useRef(null),
   }
 
-  const [isAninating, animate] = useToggle()
+  const [isPlay, setPlay] = useState(true)
+  const [reverse, toggleReverse] = useToggle()
 
   useGsap((gsap) => {
     timeline.current?.progress(0).kill()
     timeline.current = gsap
-      .timeline()
+      .timeline({
+        onStart: () => setPlay(true),
+        onComplete: () => setPlay(false),
+        onReverseComplete: () => setPlay(false),
+      })
       .to(shape.box.current, { rotate: 360 })
-      .to(shape.circle.current, { x: 50 })
+      .to(shape.circle.current, {
+        x: 50,
+      })
   })
 
   useEffect(() => {
-    timeline.current?.reversed(isAninating)
-  }, [isAninating])
+    timeline.current?.reversed(reverse)
+    if (reverse) setPlay(true)
+  }, [reverse])
 
   return (
     <div className="flex flex-col justify-between space-y-4">
+      <ButtonPlay
+        onClick={toggleReverse}
+        className="text-center"
+        isPlay={isPlay}
+      />
       <Box ref={shape.box} className="bg-green-600">
         Box
       </Box>
-      <button
-        onClick={animate}
-        className="p-2 border-2 rounded-md hover:bg-yellow-200"
-      >
-        Toggle
-      </button>
       <Circle ref={shape.circle} className="bg-green-600">
         Circle
       </Circle>
