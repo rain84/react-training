@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom'
 import { routes } from './routes'
 import './index.css'
+import './index.sass'
 
 const router = createBrowserRouter(createRoutesFromElements(routes))
 
