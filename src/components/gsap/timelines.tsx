@@ -11,7 +11,7 @@ export const Timelines = ({ className }: IProps) => {
     circle: useRef(null),
   }
 
-  const [isPlay, setPlay] = useState(true)
+  const [isPlayed, setPlay] = useState(true)
   const [reverse, toggleReverse] = useToggle()
 
   useGsap((gsap) => {
@@ -38,7 +38,7 @@ export const Timelines = ({ className }: IProps) => {
       <ButtonPlay
         onClick={toggleReverse}
         className="text-center"
-        isPlay={isPlay}
+        isPlayed={isPlayed}
       />
       <Box ref={shape.box} className="bg-green-600">
         Box

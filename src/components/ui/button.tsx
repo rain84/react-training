@@ -17,8 +17,8 @@ export const Button = forwardRef<
 
 export const ButtonPlay = forwardRef<
   HTMLButtonElement,
-  HTMLAttributes<HTMLButtonElement> & Partial<{ isPlay: boolean }>
->(({ className, isPlay, children, ...props }, ref) => (
+  HTMLAttributes<HTMLButtonElement> & Partial<{ isPlayed: boolean }>
+>(({ className, isPlayed: isPlay, children, ...props }, ref) => (
   <Button {...props} className="text-center" ref={ref}>
     <PlayIcon
       className={`stroke-${isPlay ? 'green' : 'red'}-500 stroke-1 inline`}
