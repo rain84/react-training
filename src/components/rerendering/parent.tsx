@@ -4,7 +4,7 @@ import { Children, Subchildren, List } from '.'
 import { getData } from 'utils'
 
 type Props = {
-  prop?: number
+  prop?: boolean
   children?: React.ReactElement
   list?: React.ReactElement
   name?: string
@@ -17,7 +17,7 @@ export const Parent1 = memo(({ prop, name, children, list }: Props) => {
 
   return (
     <>
-      <p>Parent1 Parent1 Parent1 Parent1 Parent1 Parent1 Parent1</p>
+      <p>Parent1</p>
 
       {children}
 
@@ -38,7 +38,7 @@ export const Parent2 = memo(({ prop, children, name }: Props) => {
 
   return (
     <>
-      <p>Parent2 Parent2 Parent2 Parent2 Parent2 Parent2 Parent2 </p>
+      <p>Parent2</p>
       <Children name={`${name}-Parent2`} />
     </>
   )

@@ -1,18 +1,16 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Parent1, Parent2, List, Subchildren } from 'components'
+import { useToggle } from 'hooks'
 
 export const RerenderingPage = () => {
   const timer = 3000
-  const [prop, setProp] = useState(0)
+  const [prop, toggle] = useToggle()
 
-  // useEffect(() => {
-  //   setInterval(() => {
-  //     setProp(prop ? 0 : 1)
-  //     console.log('\n')
-  //   }, timer)
-  // }, [prop])
+  useEffect(() => {
+    setInterval(toggle, timer)
+  }, [prop])
 
-  // console.log('ParentChildRerender')
+  console.log('Component RerenderingPage')
 
   return (
     <section>
