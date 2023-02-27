@@ -9,7 +9,7 @@ export const Button = forwardRef<
     {...props}
     ref={ref}
     onClick={onClick}
-    className="p-2 border-2 rounded-md hover:bg-yellow-200"
+    className="p-2 border-2 rounded-md hover:bg-yellow-200 inline w-12 h-12"
   >
     {children}
   </button>
