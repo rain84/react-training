@@ -11,7 +11,7 @@ export const Timelines = ({ className }: IProps) => {
     circle: useRef(null),
   }
 
-  const [isPlayed, setPlay] = useState(true)
+  const [isPlayed, setPlay] = useState(false)
   const [reverse, toggleReverse] = useToggle()
 
   useGsap((gsap) => {
@@ -26,10 +26,11 @@ export const Timelines = ({ className }: IProps) => {
       .to(shape.circle.current, {
         x: 50,
       })
+      .pause()
   })
 
   useEffect(() => {
-    timeline.current?.reversed(reverse)
+    timeline.current?.play().reversed(reverse)
     if (reverse) setPlay(true)
   }, [reverse])
 
