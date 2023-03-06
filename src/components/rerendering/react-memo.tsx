@@ -35,9 +35,12 @@ const WithoutMemo = () => {
 
   return (
     <>
-      <Button onClick={inc} className="border rounded">
-        + {count}
-      </Button>
+      <div className="flex flex-row gap-10 pb-5">
+        <Button onClick={inc} className="border rounded">
+          + {count}
+        </Button>
+        <p>WithoutMemo</p>
+      </div>
 
       {getLyrics().map((lyric) => (
         <Component lyric={lyric} key={lyric.id} />
@@ -53,9 +56,12 @@ const WithMemo = () => {
 
   return (
     <>
-      <Button onClick={inc} className="border rounded">
-        + {count}
-      </Button>
+      <div className="flex flex-row gap-10 pb-5">
+        <Button onClick={inc} className="border rounded">
+          + {count}
+        </Button>
+        <p>WithMemo</p>
+      </div>
 
       {getLyrics().map((lyric) => (
         <MemoizedComponent lyric={lyric} key={lyric.id} />
@@ -68,7 +74,10 @@ const WithIsolatedRerendering = () => {
   useEffect(() => console.clear(), [])
   return (
     <>
-      <Clicker />
+      <div className="flex flex-row gap-10 pb-5">
+        <Clicker />
+        <p>WithIsolatedRerendering</p>
+      </div>
 
       {getLyrics().map((lyric) => (
         <Component lyric={lyric} key={lyric.id} />
