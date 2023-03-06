@@ -1,7 +1,7 @@
 import * as Radio from '@radix-ui/react-radio-group'
 import { nanoid } from 'nanoid'
 
-type Props<T> = {
+export type Props<T> = {
   items: Array<{ value: T; label?: string }>
   defaultIndex?: number
 
