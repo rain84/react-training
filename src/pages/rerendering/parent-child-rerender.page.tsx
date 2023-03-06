@@ -6,6 +6,7 @@ import {
   Subchildren,
   ChildrenWithSpreadingProps,
   ChildrenWithoutSpreadingProps,
+  ReactMemo,
 } from 'components'
 import { useToggle } from 'hooks'
 
@@ -15,10 +16,10 @@ export const RerenderingPage = () => {
   const counter = useRef(0)
 
   useEffect(() => {
-    setInterval(toggle, timer)
+    // setInterval(toggle, timer)
   }, [prop])
 
-  console.log('Component RerenderingPage', counter.current++)
+  // console.log('Component RerenderingPage', counter.current++)
 
   return (
     <section data-prop={prop}>
@@ -27,8 +28,9 @@ export const RerenderingPage = () => {
       </Parent1>
       <br />
       <Parent2 name={'App'} /> */}
-      <ChildrenWithSpreadingProps data-prop="prop" />
-      <ChildrenWithoutSpreadingProps data-prop="prop" />
+      {/* <ChildrenWithSpreadingProps data-prop="prop" />
+      <ChildrenWithoutSpreadingProps data-prop="prop" /> */}
+      <ReactMemo />
     </section>
   )
 }
