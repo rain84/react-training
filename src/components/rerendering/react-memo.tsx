@@ -1,4 +1,4 @@
-import { useEffect, useState, memo } from 'react'
+import { useEffect, useState, memo, useCallback } from 'react'
 import { Button, FRRG } from 'ui'
 import { nanoid } from 'nanoid'
 import { Switch } from 'components/utils'
@@ -6,16 +6,20 @@ import { Switch } from 'components/utils'
 type TComponent = 'WithoutMemo' | 'WithMemo' | 'WithIsolatedRerendering'
 
 export const ReactMemo = () => {
-  const items: Array<Record<'value', TComponent>> = [
+  const items = [
     { value: 'WithoutMemo' },
     { value: 'WithMemo' },
     { value: 'WithIsolatedRerendering' },
-  ]
-  const [componentName, setComponentName] = useState(items[0].value)
+  ] as const
+  const [componentName, setComponentName] = useState<TComponent>(items[0].value)
+  const onClick: OnClick<TComponent> = useCallback(
+    (e) => setComponentName(e.target.value),
+    []
+  )
 
   return (
     <>
-      <FRRG items={items} onClick={(e) => setComponentName(e.target.value)} />
+      <FRRG items={items} onClick={onClick} />
 
       <Switch
         WithoutMemo={<WithoutMemo />}
