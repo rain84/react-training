@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { Item } from './item.shell'
 import type { Page } from 'pages'
 
@@ -20,7 +21,7 @@ export const Sidebar = ({ items }: Props) => {
         <div className="px-8">
           <div className="h-16 w-full flex items-center">
             <span className="w-full justify-between text-gray-300 items-center text-lg">
-              React Training
+              <Link to="/">React Training</Link>
             </span>
           </div>
 
