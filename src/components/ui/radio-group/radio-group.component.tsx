@@ -1,30 +1,18 @@
 import * as Radio from '@radix-ui/react-radio-group'
 import { nanoid } from 'nanoid'
-
-export type Props<T> = {
-  items: Array<{ value: T; label?: string }>
-  defaultIndex?: number
-
-  onClick: (
-    e: Event & {
-      target: HTMLButtonElement & { value: T }
-    }
-  ) => void
-} & IProps
-
-const prefix = nanoid(6).toString()
-const id = (value: string) => prefix + '_' + value
+import type { Props, Items, Value, ValueLabel } from './radio-group.types'
 
 export const RadioGroup = <T extends string>({
-  items,
+  items: items_,
   className,
   defaultIndex = 0,
   onClick,
 }: Props<T>) => {
+  const items = toValueLabelItems(items_)
   return (
     <Radio.Root
       className={`flex ${className}`}
-      defaultValue={items[defaultIndex]?.value}
+      defaultValue={items?.[defaultIndex]?.value}
     >
       {items.map(({ value, label }) => (
         <div key={value} className="flex items-center">
@@ -45,3 +33,10 @@ export const RadioGroup = <T extends string>({
     </Radio.Root>
   )
 }
+
+const prefix = nanoid(6).toString()
+const id = (value: string) => prefix + '_' + value
+const isValueItems = <T extends string>(items: Items<T>): items is Value<T> =>
+  typeof items[0] === 'string'
+const toValueLabelItems = <T extends string>(arr: Items<T>): ValueLabel<T> =>
+  isValueItems(arr) ? arr.map((value) => ({ value, label: value })) : arr
