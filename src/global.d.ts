@@ -27,3 +27,11 @@ namespace gsap {
     ease?: GsapEase
   }
 }
+
+declare type OnClick<V extends unknown, T = HTMLElement> = (
+  e: Event & {
+    target: T & {
+      value: V
+    }
+  }
+) => void
