@@ -1,7 +1,7 @@
 import { Route } from 'react-router-dom'
 import {
   HomePage,
-  RerenderingPage,
+  PerformancePage,
   Error404Page,
   GsapPage,
   TestPage,
@@ -11,7 +11,7 @@ import { AppLayout } from 'layouts'
 export const routes = (
   <Route path="/" element={<AppLayout />}>
     <Route index element={<HomePage />} />
-    <Route path="/rerendering" element={<RerenderingPage />} />
+    <Route path="/performance" element={<PerformancePage />} />
     <Route path="/gsap" element={<GsapPage />} />
     <Route path="/test" element={<TestPage />} />
     <Route path="*" element={<Error404Page />} />

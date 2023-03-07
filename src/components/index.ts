@@ -1,2 +1,2 @@
-export * from './rerendering'
+export * from './performance'
 export * from './gsap'

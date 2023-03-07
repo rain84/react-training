@@ -23,7 +23,7 @@ export const PropsDrilling = () => {
     setInterval(toggle, timer)
   }, [toggle])
 
-  log('Component RerenderingPage', counter.current++)
+  log('Component <PropsDrilling>', counter.current++)
 
   const [layout, setLayout] = useState<Layouts>('Parent1')
   const items = ['Parent1', 'Parent2', 'Children1', 'Children2'] as const

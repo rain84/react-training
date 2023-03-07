@@ -1,12 +1,12 @@
 import { useCallback, useState } from 'react'
 import { ReactMemo } from 'components'
-import { PropsDrilling } from 'components/rerendering/props-drilling'
+import { PropsDrilling } from 'components/performance/props-drilling'
 import { Switch } from 'components/utils'
 import { FRRG } from 'ui'
 
 type Layouts = 'PropsDrilling' | 'ReactMemo'
 
-export const RerenderingPage = () => {
+export const PerformancePage = () => {
   const [layout, setLayout] = useState<Layouts>('PropsDrilling')
   const items = ['PropsDrilling', 'ReactMemo'] as const
   const onClick: OnClick<Layouts> = useCallback(

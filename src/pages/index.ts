@@ -1,5 +1,5 @@
 export * from './home.page'
-export * from './rerendering.page'
+export * from './performance.page'
 export * from './error404.page'
 export * from './gsap.page'
 export * from './test.page'
@@ -10,7 +10,7 @@ export type Page = {
 }
 
 export const PagesList: Page[] = [
-  { name: 'rerendering', href: 'rerendering' },
+  { name: 'performance', href: 'performance' },
   { name: 'GSAP', href: 'gsap' },
   { name: 'Test', href: 'test' },
 ]
