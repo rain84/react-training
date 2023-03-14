@@ -47,7 +47,7 @@ const GsapProvider = ({ children, className }: IProps) => {
         unregister()
         if (nextDeps) removeDeps(...nextDeps)
       }
-    }, [nextDeps])
+    }, [nextDeps, cb])
   }
 
   const value = useMemo<TContext>(
