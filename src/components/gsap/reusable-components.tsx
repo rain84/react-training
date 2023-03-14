@@ -10,7 +10,7 @@ const INPUT_DELAY = 50
 
 export const ReusableComponents = () => {
   const { useGsap } = useContext(GsapContext)
-  const [isPlayed, toggle] = useToggle(true)
+  const [isPlaying, toggle] = useToggle(true)
   const box = {
     1: useRef(null),
     2: useRef(null),
@@ -35,18 +35,18 @@ export const ReusableComponents = () => {
     tweens[3].current = gsap.to(box[3].current, { x: width, repeat: -1, repeatDelay: 1, yoyo: true })
     gsap.set(box[2].current, { backgroundColor: 'red' })
 
-    if (!isPlayed) {
+    if (!isPlaying) {
       tweens[1].current.kill()
       tweens[3].current.kill()
     }
-  }, [width, isPlayed])
+  }, [width, isPlaying])
 
   return (
     <div className="flex flex-col justify-between space-y-4">
       <ButtonPlay
         onClick={toggle}
         className="text-center"
-        isPlayed={isPlayed}
+        isPlaying={isPlaying}
       />
 
       <Input.Number

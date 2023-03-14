@@ -5,7 +5,7 @@ import { useToggle } from 'hooks'
 
 export const Rotate = ({ className }: IProps) => {
   const { useGsap } = useContext(GsapContext)
-  const [isPlayed, toggle] = useToggle(true)
+  const [isPlaying, toggle] = useToggle(true)
   const box1 = useRef(null)
   const box2 = useRef(null)
   const box3 = useRef(null)
@@ -15,15 +15,15 @@ export const Rotate = ({ className }: IProps) => {
     (gsap) => {
       tween.current = gsap.to([box1.current, box2.current, box3.current], {
         rotation: '+360',
-        repeat: isPlayed ? -1 : 0,
+        repeat: isPlaying ? -1 : 0,
         duration: 1,
         stagger: 0.5,
         repeatDelay: 1,
         ease: 'back.in',
       })
-      if (!isPlayed) tween.current.kill()
+      if (!isPlaying) tween.current.kill()
     },
-    [isPlayed]
+    [isPlaying]
   )
 
   return (
@@ -31,7 +31,7 @@ export const Rotate = ({ className }: IProps) => {
       <ButtonPlay
         onClick={toggle}
         className="text-center"
-        isPlayed={isPlayed}
+        isPlaying={isPlaying}
       />
       <Box ref={box1} className={`bg-orange-400 ${className}`}>
         Hello 1
