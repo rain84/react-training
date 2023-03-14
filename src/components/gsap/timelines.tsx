@@ -1,45 +1,74 @@
-import { useContext, useEffect, useRef, useState } from 'react'
-import { GsapContext } from './context'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Box, Circle, ButtonPlay } from 'ui'
-import { useToggle } from 'hooks'
+import { gsap } from 'gsap'
+import { withLog } from 'utils'
 
 export const Timelines = ({ className }: IProps) => {
-  const { useGsap } = useContext(GsapContext)
   const timeline = useRef<gsap.core.Timeline>()
   const shape = {
     box: useRef(null),
     circle: useRef(null),
   }
+  const root = useRef(null)
 
-  const [isPlayed, setPlay] = useState(false)
-  const [reverse, toggleReverse] = useToggle()
+  const [isPlaying, setPlay] = useState(false)
+  const [isPausing, setPause] = useState(false)
+  const [isReverse, toggleReverse] = useState(false)
+  const duration = 2
 
-  useGsap((gsap) => {
-    timeline.current?.progress(0).kill()
-    timeline.current = gsap
-      .timeline({
-        onStart: () => setPlay(true),
-        onComplete: () => setPlay(false),
-        onReverseComplete: () => setPlay(false),
-      })
-      .to(shape.box.current, { rotate: 360 })
-      .to(shape.circle.current, {
-        x: 50,
-      })
-      .pause()
-  })
+  // TODO: refactor with useGsap-hook
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      timeline.current?.progress(0)?.kill()
+      timeline.current = gsap
+        .timeline({
+          onStart: withLog('onStart')(),
+          onComplete: withLog('onComplete')(() => {
+            setPlay(false)
+            toggleReverse(true)
+          }),
+          onReverseComplete: withLog('onReverseComplete')(() => {
+            setPlay(false)
+            toggleReverse(false)
+          }),
+        })
+        .to(shape.box.current, { rotate: 360, duration })
+        .to(shape.circle.current, { x: 50, duration })
+        .pause()
+    }, root)
+  }, [shape.box, shape.circle, setPlay, toggleReverse])
+
+  const onClick = () => {
+    const tl = timeline.current
+    if (!tl) return
+
+    if (isPlaying) {
+      setPause((x) => !x)
+    } else {
+      setPlay(true)
+    }
+  }
 
   useEffect(() => {
-    timeline.current?.play().reversed(reverse)
-    if (reverse) setPlay(true)
-  }, [reverse])
+    const tl = timeline.current
+    if (!tl) return
+
+    // TODO: rewrite with XState
+    if (isPlaying) {
+      if (isPausing) tl.pause()
+      else {
+        if (isReverse) tl.reverse()
+        else tl.play()
+      }
+    }
+  }, [isPausing, isPlaying, isReverse])
 
   return (
-    <div className="flex flex-col justify-between space-y-4">
+    <div className="flex flex-col justify-between space-y-4" ref={root}>
       <ButtonPlay
-        onClick={toggleReverse}
+        onClick={onClick}
         className="text-center"
-        isPlayed={isPlayed}
+        isPlaying={isPlaying && !isPausing}
       />
       <Box ref={shape.box} className="bg-green-600">
         Box
