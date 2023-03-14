@@ -26,8 +26,8 @@ const color = (x?: boolean) => colors[String(!!x) as ColorTypes]
 
 export const ButtonPlay = forwardRef<
   HTMLButtonElement,
-  HTMLAttributes<HTMLButtonElement> & Partial<{ isPlayed: boolean }>
->(({ className, isPlayed, children, ...props }, ref) => (
+  HTMLAttributes<HTMLButtonElement> & Partial<{ isPlaying: boolean }>
+>(({ className, isPlaying: isPlayed, children, ...props }, ref) => (
   <Button {...props} className="text-center" ref={ref}>
     <PlayIcon
       className={clsx(
