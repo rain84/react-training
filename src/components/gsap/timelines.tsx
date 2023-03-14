@@ -14,7 +14,7 @@ export const Timelines = ({ className }: IProps) => {
   const [isPlaying, setPlay] = useState(false)
   const [isPausing, setPause] = useState(false)
   const [isReverse, toggleReverse] = useState(false)
-  const duration = 2
+  const duration = 1
 
   // TODO: refactor with useGsap-hook
   useLayoutEffect(() => {
