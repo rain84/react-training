@@ -5,7 +5,6 @@ import { fileURLToPath } from 'url'
 type Entry = {
   name: string
   path: string
-  stat: any
 }
 
 export const fileDirName = () => {
@@ -20,7 +19,7 @@ export const resolveAlias = async () => {
   const { __dirname } = fileDirName()
   const src = path.resolve(__dirname, './src')
   const entries = await fs.readdir(src)
-  const folders = (
+  const resources = (
     await Promise.all(
       entries.map((name) => {
         const p = path.resolve(src, name)
@@ -29,7 +28,6 @@ export const resolveAlias = async () => {
             res({
               name,
               path: p,
-              stat: await fs.stat(p),
             })
           } catch (error) {
             rej(error)
@@ -37,10 +35,8 @@ export const resolveAlias = async () => {
         })
       })
     )
-  )
-    .filter(({ stat }) => stat.isDirectory())
-    .map(({ name, path }) => [name, path])
+  ).map(({ name, path }) => [name, path])
 
-  const alias = Object.fromEntries(folders)
+  const alias = Object.fromEntries(resources)
   return { alias }
 }
