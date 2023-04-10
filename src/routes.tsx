@@ -7,9 +7,13 @@ import {
   TestPage,
 } from 'pages'
 import { AppLayout } from 'layouts'
+import { ErrorBoundary } from 'components/utils'
 
+// prettier-ignore
 export const routes = (
-  <Route path="/" element={<AppLayout />}>
+  <Route
+    path="/"
+    element={<ErrorBoundary><AppLayout /></ErrorBoundary>}>
     <Route index element={<HomePage />} />
     <Route path="/performance" element={<PerformancePage />} />
     <Route path="/gsap" element={<GsapPage />} />
