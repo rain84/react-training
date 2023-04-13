@@ -3,17 +3,38 @@ import { clsx } from 'clsx'
 
 export const Items = ({ items, visible, query = '', index }: ItemsProps) => {
   if (!(visible && items.length)) return null
+  console.clear()
   return (
     <ul className="mt-1 px-2 py-1 border border-violet-700 rounded-sm w-40 shadow-2xl absolute z-10 bg-white">
       {items.map((val, i) => (
-        <li key={val} className={clsx(isActive(i, index) && 'bg-slate-300')}>
-          <>
-            <strong>{val.slice(0, query.length)}</strong>
-            {val.slice(query.length)}
-          </>
-        </li>
+        <Item
+          key={val}
+          val={val}
+          className={clsx(isActive(i, index) && 'bg-slate-300')}
+          query={query}
+        />
       ))}
     </ul>
+  )
+}
+
+type ItemProps = {
+  val: string
+  key: string
+  query: string
+  className: string
+}
+function Item({ val, query, className }: ItemProps) {
+  const i = val.toLowerCase().indexOf(query)
+  const left = val.slice(0, i)
+  const right = val.slice(i + query.length)
+
+  return (
+    <li className={className}>
+      {left}
+      <strong>{query}</strong>
+      {right}
+    </li>
   )
 }
 

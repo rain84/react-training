@@ -116,5 +116,5 @@ function getNextIndex(
 
 function filter(items: string[], value: string) {
   value = value.toLowerCase()
-  return items.filter((val) => val.toLowerCase().startsWith(value))
+  return items.filter((val) => val.toLowerCase().includes(value))
 }
