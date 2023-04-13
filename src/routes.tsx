@@ -5,6 +5,7 @@ import {
   Error404Page,
   GsapPage,
   TestPage,
+  ComponentsPage,
 } from 'pages'
 import { AppLayout } from 'layouts'
 import { ErrorBoundary } from 'components/utils'
@@ -16,6 +17,7 @@ export const routes = (
     element={<ErrorBoundary><AppLayout /></ErrorBoundary>}>
     <Route index element={<HomePage />} />
     <Route path="/performance" element={<PerformancePage />} />
+    <Route path="/components" element={<ComponentsPage />} />
     <Route path="/gsap" element={<GsapPage />} />
     <Route path="/test" element={<TestPage />} />
     <Route path="*" element={<Error404Page />} />
