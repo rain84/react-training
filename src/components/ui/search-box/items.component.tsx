@@ -1,9 +1,8 @@
-import type { ItemsProps } from './search-box.types'
+import type { ItemsProps, ItemProps } from './search-box.types'
 import { clsx } from 'clsx'
 
 export const Items = ({ items, visible, query = '', index }: ItemsProps) => {
   if (!(visible && items.length)) return null
-  console.clear()
   return (
     <ul className="mt-1 px-2 py-1 border border-violet-700 rounded-sm w-40 shadow-2xl absolute z-10 bg-white">
       {items.map((val, i) => (
@@ -18,16 +17,14 @@ export const Items = ({ items, visible, query = '', index }: ItemsProps) => {
   )
 }
 
-type ItemProps = {
-  val: string
-  key: string
-  query: string
-  className: string
-}
-function Item({ val, query, className }: ItemProps) {
+const Item = ({ val, query, className }: ItemProps) => {
   const i = val.toLowerCase().indexOf(query)
   const left = val.slice(0, i)
   const right = val.slice(i + query.length)
+
+  // if we started from the begining of val (i === 0),
+  // we just coping from target string with its own capitalizing
+  if (!left.length) query = val.slice(0, query.length)
 
   return (
     <li className={className}>
@@ -35,6 +32,14 @@ function Item({ val, query, className }: ItemProps) {
       <strong>{query}</strong>
       {right}
     </li>
+  )
+}
+
+export const Loading = () => {
+  return (
+    <div className="mt-1 px-2 py-1 border border-violet-700 rounded-sm w-40 shadow-2xl absolute z-10 bg-white   justify-center flex">
+      <span>Loading...</span>
+    </div>
   )
 }
 

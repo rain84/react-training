@@ -2,20 +2,24 @@ import { useState, useRef, useEffect } from 'react'
 import type { KeyboardEventHandler } from 'react'
 import debounce from 'lodash/debounce'
 import clsx from 'clsx'
-import { Items } from './items.component'
+import { Items, Loading } from './items.component'
 import type { OnChangeEvent, SearchBoxProps } from './search-box.types'
+import { Switch } from 'components/utils'
 
 const INPUT_DELAY = 200
 
 export const SearchBox = ({
   className,
-  items,
+  items = [],
   initialValue = '',
   id = '',
   name = '',
   autofocus = false,
   disabled = false,
+  loading = false,
+
   onSelect,
+  onChange: onChange_,
 }: SearchBoxProps) => {
   const [query, setQuery] = useState(initialValue)
   const filteredItems = filter(items, query)
@@ -27,6 +31,7 @@ export const SearchBox = ({
 
   const onChange = debounce((e: OnChangeEvent) => {
     setQuery(e.target.value)
+    onChange_?.(e.target.value)
   }, INPUT_DELAY)
 
   const onKeyDown: KeyboardEventHandler<HTMLInputElement> = (e) => {
@@ -84,12 +89,20 @@ export const SearchBox = ({
         onKeyDown={onKeyDown}
         disabled={disabled}
       />
-      <Items
-        items={filteredItems}
-        visible={!!query.length}
-        query={query}
-        index={index}
-      />
+
+      <Switch
+        true={<Loading />}
+        false={
+          <Items
+            items={filteredItems}
+            visible={!!query.length}
+            query={query}
+            index={index}
+          />
+        }
+      >
+        {String(loading) as 'true' | 'false'}
+      </Switch>
     </section>
   )
 }

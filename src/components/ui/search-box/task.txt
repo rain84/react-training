@@ -15,24 +15,24 @@ not be feasible to store on the client side.
 Your task is to create a component that listens to user input events 
 and shows a list of possible matches.
 
-Task 1:
+Task 1: +
 
 Write a search box component with autocomplete. 
 The list of possible options is on the client’s side.
 
-Task 2:
+Task 2: +
 
 The designer wants the list to only show the accounts that includes 
 the search term entered by the user. Moreover he has a desire 
 to highlight matches in the list of results.
 
-Task 3:
+Task 3: +
 
 As you remember you store a list of options on the client’s side. 
 This list can be really huge. How to avoid glitches and delays? 
 Please, improve the performance of your component if it is needed.
 
-Task 4:
+Task 4: +
 
 Unfortunately some users can have more than 1 mln accounts. 
 As a result the request for such options list is too slow. 
