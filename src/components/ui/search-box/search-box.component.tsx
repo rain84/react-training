@@ -2,30 +2,43 @@ import { useState, useRef, useEffect } from 'react'
 import type { KeyboardEventHandler } from 'react'
 import debounce from 'lodash/debounce'
 import clsx from 'clsx'
-import { Items, Loading } from './items.component'
-import type { OnChangeEvent, SearchBoxProps } from './search-box.types'
+import { Items, Loading, Error } from './items.component'
+import type {
+  OnChangeEvent,
+  SearchBoxProps,
+  TItemsState,
+} from './search-box.types'
 import { Switch } from 'components/utils'
+import { log } from 'console'
 
 const INPUT_DELAY = 200
 
 export const SearchBox = ({
   className,
-  items = [],
+  items: items_ = [],
   initialValue = '',
   id = '',
   name = '',
   autofocus = false,
   disabled = false,
-  loading = false,
 
   onSelect,
   onChange: onChange_,
+  onError,
 }: SearchBoxProps) => {
   const [query, setQuery] = useState(initialValue)
+
+  const [isAsync, setIsAsync] = useState(items_ instanceof Promise)
+  const [items, setItems] = useState(isAsync ? [] : (items_ as string[]))
+  const [itemsState, setItemsState] = useState<TItemsState>(
+    isAsync ? 'loading' : 'ready'
+  )
   const filteredItems = filter(items, query)
+
   const [index, setIndex] = useState(-1)
   const indexMax = filteredItems.length - 1
   const indexMin = 0
+
   const inputNode = useRef<HTMLInputElement>(null)
   const [isSelected, setIsSelected] = useState(false)
 
@@ -74,8 +87,39 @@ export const SearchBox = ({
     if (autofocus) inputNode.current?.focus()
   }, [autofocus])
 
+  // process async items
+  useEffect(() => {
+    console.log('useEffect')
+
+    const canProcess =
+      // incoming promisified data
+      (!isAsync && items_ instanceof Promise) ||
+      (!isAsync && itemsState === 'ready')
+
+    if (canProcess) {
+      ;(async () => {
+        try {
+          console.log('process: loading')
+          setItemsState('loading')
+          setIsAsync(true)
+          const items = await items_
+          setItems(items)
+          setItemsState('ready')
+        } catch (error) {
+          setItemsState('error')
+          onError?.(error as Error)
+        } finally {
+          setIsAsync(false)
+        }
+      })()
+    }
+  }, [items_, onError, isAsync, itemsState])
+
   return (
     <section className="m-5 inline-block">
+      <br />
+      itemsState:'{itemsState}', isAsync: '{String(isAsync)}'
+      <br />
       <input
         ref={inputNode}
         name={name}
@@ -89,10 +133,9 @@ export const SearchBox = ({
         onKeyDown={onKeyDown}
         disabled={disabled}
       />
-
       <Switch
-        true={<Loading />}
-        false={
+        loading={Loading}
+        ready={
           <Items
             items={filteredItems}
             visible={!!query.length}
@@ -100,8 +143,9 @@ export const SearchBox = ({
             index={index}
           />
         }
+        error={Error}
       >
-        {String(loading) as 'true' | 'false'}
+        {itemsState}
       </Switch>
     </section>
   )

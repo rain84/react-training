@@ -3,16 +3,16 @@ import type { ChangeEvent } from 'react'
 export type SearchBoxProps = {
   className?: string
   initialValue?: string
-  items?: string[]
+  items?: string[] | Promise<string[]>
 
   id?: string
   name?: string
   autofocus?: boolean
   disabled?: boolean
-  loading?: boolean
 
   onSelect?: (value: string) => void
   onChange?: (value: string) => void
+  onError?: (e: Error) => void
 }
 
 export type ItemsProps = {
@@ -32,3 +32,5 @@ export type ItemProps = {
   query: string
   className: string
 }
+
+export type TItemsState = 'loading' | 'ready' | 'error'

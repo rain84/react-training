@@ -35,13 +35,17 @@ const Item = ({ val, query, className }: ItemProps) => {
   )
 }
 
-export const Loading = () => {
-  return (
-    <div className="mt-1 px-2 py-1 border border-violet-700 rounded-sm w-40 shadow-2xl absolute z-10 bg-white   justify-center flex">
-      <span>Loading...</span>
-    </div>
-  )
-}
+export const Loading = (
+  <div className="mt-1 px-2 py-1 border border-violet-700 rounded-sm w-40 shadow-2xl absolute z-10 bg-white   justify-center flex">
+    <span>Loading...</span>
+  </div>
+)
+
+export const Error = (
+  <div className="mt-1 px-2 py-1 border border-violet-700 rounded-sm w-40 shadow-2xl absolute z-10 bg-white   justify-center flex">
+    <span>Error</span>
+  </div>
+)
 
 function isActive(i1: number, i2: number) {
   return i1 === i2
