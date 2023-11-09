@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .scroll {
+    scrollbar-width: thin;
+    scrollbar-color: #dfe2e4 white;
+  }
+
+  .scroll::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .scroll::-webkit-scrollbar-thumb {
+    border: 2px solid white;
+    background-clip: padding-box;
+    border-radius: 10px;
+    background-color: #dfe2e4;
+  }
+}
