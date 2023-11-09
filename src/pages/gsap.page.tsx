@@ -4,7 +4,6 @@ import {
   HoverMe,
   ReusableComponents,
   Timelines,
-  Timelines2,
 } from 'components/gsap'
 
 export const GsapPage = () => (
@@ -15,7 +14,6 @@ export const GsapPage = () => (
       <HoverMe />
       <ReusableComponents />
       <Timelines />
-      {/* <Timelines2 /> */}
     </Gsap>
   </section>
 )
