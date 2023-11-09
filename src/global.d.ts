@@ -1,5 +1,6 @@
 declare type MaybeNull<T> = T | null
 declare type MaybeUndefined<T> = T | undefined
+declare type Maybe<T> = MaybeNull<T> | MaybeUndefined<T>
 
 declare interface IProps {
   className?: string
