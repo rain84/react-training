@@ -1,12 +1,24 @@
 import { NavLink, Route, Routes } from 'react-router-dom'
-import { SearchBoxPage } from './search-box.page'
-import { ScrollPage } from './scroll.page'
 import clsx from 'clsx'
+import * as _pages from './pages'
 
-const componentsList = [
-  ['SearchBox', SearchBoxPage],
-  ['ScrollPage', ScrollPage],
-] as const
+const pages = Object.entries(_pages)
+
+export const ComponentsPage = () => (
+  <section className="m-1">
+    <div className="text-left mb-2">
+      {pages.map(([name]) => (
+        <Button name={name} key={name} />
+      ))}
+    </div>
+
+    <Routes>
+      {pages.map(([page, Component]) => (
+        <Route path={`/${page}`} Component={Component} key={page} />
+      ))}
+    </Routes>
+  </section>
+)
 
 const Button = ({ name }: { name: string }) => (
   <NavLink
@@ -21,20 +33,4 @@ const Button = ({ name }: { name: string }) => (
   >
     &lt;{name}&gt;
   </NavLink>
-)
-
-export const ComponentsPage = () => (
-  <section className="m-1">
-    <div className="text-left mb-2">
-      {componentsList.map(([componentName]) => (
-        <Button name={componentName} />
-      ))}
-    </div>
-
-    <Routes>
-      {componentsList.map(([page, Component]) => (
-        <Route path={`/${page}`} Component={Component} key={page} />
-      ))}
-    </Routes>
-  </section>
 )
