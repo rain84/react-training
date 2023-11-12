@@ -5,7 +5,7 @@ import * as _pages from './pages'
 const pages = Object.entries(_pages)
 
 export const ComponentsPage = () => (
-  <section className="m-1">
+  <section className="m-1 h-full">
     <div className="text-left mb-2">
       {pages.map(([name]) => (
         <Button name={name} key={name} />

@@ -1,25 +1,19 @@
+import { useState } from 'react'
 import clsx from 'clsx'
 import { ModalMini } from 'components/ui'
-import { MouseEventHandler, ReactNode, useState } from 'react'
 
-export const ModalMiniPage = () => {
-  const [open, setOpen] = useState(false)
-  const show = () => setOpen(true)
-  const hide = () => setOpen(false)
-
-  return (
-    <div className="flex justify-center relative">
-      {['left-0', 'left-2/5', 'right-0'].map((pos) => (
+export const ModalMiniPage = () => (
+  <div className="flex justify-center relative h-full">
+    {['-left-[270px] top-[10em]', 'left-2/5', 'right-0', 'bottom-0'].map(
+      (pos) => (
         <Container
           key={pos}
           className={`absolute ${pos} mt-5 select-none border rounded-md p-2 hover:cursor-pointer`}
-          isPressed={open}
-          onClick={show}
         />
-      ))}
-    </div>
-  )
-}
+      )
+    )}
+  </div>
+)
 
 const Days = () => (
   <>
@@ -45,11 +39,9 @@ const days = [
 
 interface IProps {
   className?: string
-  isPressed: boolean
-  onClick: MouseEventHandler<HTMLSpanElement>
 }
 
-const Container = ({ isPressed, className = '', onClick }: IProps) => {
+const Container = ({ className = '' }: IProps) => {
   const [open, setOpen] = useState(false)
   const show = () => setOpen(true)
   const hide = () => setOpen(false)
@@ -57,7 +49,10 @@ const Container = ({ isPressed, className = '', onClick }: IProps) => {
   return (
     <span
       onClick={show}
-      className={clsx(className, isPressed && 'shadow-inner bg-slate-100')}
+      className={clsx(className, {
+        'shadow-inner bg-slate-100': open,
+        'bg-white': !open,
+      })}
     >
       <span>Button with Modal-Mini</span>
       <ModalMini
