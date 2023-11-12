@@ -21,7 +21,10 @@ export const ModalMini = ({
   if (!open) return null
 
   return (
-    <section className={clsx('absolute invisible', className)} ref={modalRef}>
+    <section
+      className={clsx('absolute invisible z-10', className)}
+      ref={modalRef}
+    >
       {children}
     </section>
   )
