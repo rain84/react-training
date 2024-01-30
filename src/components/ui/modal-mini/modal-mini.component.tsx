@@ -2,7 +2,7 @@ import { useRef, type ReactNode } from 'react'
 import { useCalcPosition, useContainer, useHandleEvents } from './hooks'
 import clsx from 'clsx'
 
-const DEFAULT_OFFSET = '4px'
+const DEFAULT_OFFSET = 4
 
 export const ModalMini = ({
   children,
@@ -33,7 +33,7 @@ export const ModalMini = ({
 interface IProps {
   className: string
   children: ReactNode
-  offset?: string
+  offset?: number
   open: boolean
 
   onClose: () => void

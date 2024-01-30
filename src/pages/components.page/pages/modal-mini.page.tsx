@@ -4,14 +4,12 @@ import { ModalMini } from 'components/ui'
 
 export const ModalMiniPage = () => (
   <div className="flex justify-center relative h-full">
-    {['-left-[270px] top-[10em]', 'left-2/5', 'right-0', 'bottom-0'].map(
-      (pos) => (
-        <Container
-          key={pos}
-          className={`absolute ${pos} mt-5 select-none border rounded-md p-2 hover:cursor-pointer`}
-        />
-      )
-    )}
+    {['-left-[270px] top-0', 'left-2/5', '-right-6', 'bottom-16'].map((pos) => (
+      <Container
+        key={pos}
+        className={`absolute ${pos} mt-5 select-none border-2 border-red-400 rounded-md p-2 hover:cursor-pointer`}
+      />
+    ))}
   </div>
 )
 
@@ -57,8 +55,9 @@ const Container = ({ className = '' }: IProps) => {
       <span>Button with Modal-Mini</span>
       <ModalMini
         open={open}
+        offset={0}
         onClose={hide}
-        className="border rounded-md hover:cursor-pointer"
+        className="border rounded-md hover:cursor-pointer border-stone-600"
       >
         <Days />
       </ModalMini>
