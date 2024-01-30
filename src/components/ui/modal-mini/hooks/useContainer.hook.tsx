@@ -12,10 +12,13 @@ export const useContainer = (
 
     // looking for a parent container with 'relative' or 'absolute'
     let container = modalRef.current
+    let position = ''
+    const positions = ['static', 'absolute']
     do {
       if (container.parentElement === null) throw new Error(ERROR_MESSAGE)
       container = container.parentElement
-    } while (getComputedStyle(container).position === 'static')
+      position = getComputedStyle(container).position
+    } while (!positions.includes(position))
 
     setContainerNode(container)
   }, [modalRef, open, onClose])
