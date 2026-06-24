@@ -1,3 +1,7 @@
 allowBuilds:
   '@parcel/watcher': false
   unrs-resolver: false
+minimumReleaseAgeExclude:
+  - '@vitejs/plugin-react@6.0.3'
+  - autoprefixer@10.5.1
+  - vite@8.1.0
