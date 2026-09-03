@@ -1,2 +1,2 @@
-export * from './react-memo'
 export * from './props-drilling'
+export * from './react-memo'

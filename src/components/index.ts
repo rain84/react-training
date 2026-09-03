@@ -1,2 +1,2 @@
-export * from './performance'
 export * from './gsap'
+export * from './performance'
